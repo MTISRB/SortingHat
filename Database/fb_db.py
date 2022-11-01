@@ -5,9 +5,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-
 import pandas as pd
-import pprint
 
 
 def parse(key):
@@ -29,7 +27,6 @@ def load_data(xlsx_file, sheet_name) -> list:
 
     for x, _list in enumerate(t):
         t[x] = [item for item in _list if str(item) != 'nan']
-    #print(t)
 
     return t
 
@@ -41,9 +38,9 @@ def fill_fb(t: list):
     richting = t[3]
     punten = t[4]
 
-    ref, handle = query()
+    ref, _ = query()
 
-    handle = db.reference("py/DATA_ID")
+    db.reference("py/DATA_ID")
     for i, q in enumerate(data_id):
         vragen_ref = ref.child('DATA_ID')
         vragen_ref.update({
@@ -52,7 +49,7 @@ def fill_fb(t: list):
             }
         })
 
-    handle = db.reference("py/vragen")
+    db.reference("py/vragen")
     for i, q in enumerate(vraag):
         vragen_ref = ref.child('vragen')
         vragen_ref.update({
@@ -62,7 +59,7 @@ def fill_fb(t: list):
             }
         })
 
-    handle = db.reference("py/antwoord")
+    db.reference("py/antwoord")
     for i, q in enumerate(antwoord):
         vragen_ref = ref.child('antwoord')
         vragen_ref.update({
@@ -72,7 +69,7 @@ def fill_fb(t: list):
             }
         })
 
-    handle = db.reference("py/richting")
+    db.reference("py/richting")
     for i, q in enumerate(richting):
         vragen_ref = ref.child('richting')
         vragen_ref.update({
@@ -82,7 +79,7 @@ def fill_fb(t: list):
             }
         })
 
-    handle = db.reference("py/punten")
+    db.reference("py/punten")
     for i, q in enumerate(punten):
         vragen_ref = ref.child('punten')
         vragen_ref.update({
@@ -91,37 +88,10 @@ def fill_fb(t: list):
                 'punten': f'{q}'
             }
         })
+    print(ref.get())
 
-# As an admin, the app has access to read and write all data, regradless of Security Rules
+
 def query() -> tuple:
     ref = db.reference('py/')
     handle = db.reference('py/vragen/')
     return ref, handle
-
-
-# users_ref = ref.child('users')
-# users_ref.set({
-#     'gebruiker_1': {
-#         'user_id': '0',
-#         'voornaam': 'John',
-#         'achternaam': 'Doe'
-#     }
-# })
-
-# vragen_ref = ref.child('vragen')
-# vragen_ref.set({
-#     'vraag_1': {
-#         'vraag_id': '1',
-#         'vraag': 'In welke richting heb je al interesse?'
-#     }
-# })
-
-# antwoorden_ref = ref.child('antwoorden')
-# antwoorden_ref.set({
-#     'antwoord_1': {
-#         'antwoorden_id': '1',
-#         'antwoorden': 'Forensische ICT, Interactie-Technologie, Software Engineering, Data engineer, geen idee'
-#     }
-# })
-
-# hopper_ref = users_ref.child('gebruiker')
