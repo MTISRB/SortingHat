@@ -16,8 +16,9 @@ def parse(key):
     })
 
 
-def load_data(xlsx_file, sheet_name) -> list:
-    data = []
+def load_data(xlsx_file, sheet_name) -> dict:
+    # Dictionary in list with lists as pairs and excel columns as keys
+    data = {}
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
