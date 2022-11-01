@@ -8,6 +8,9 @@ from firebase_admin import db
 import pandas as pd
 
 
+MAIN_ROOT: str = "py"
+
+
 def parse(key: str):
     cred = credentials.Certificate(key)
     firebase_admin.initialize_app(cred, {
@@ -36,12 +39,16 @@ def reference(name: str):
 
 
 def query() -> tuple:
-    ref = db.reference('py/')
+    ref = db.reference(f'{MAIN_ROOT}/')
     handle = db.reference('py/vragen/')
     return ref, handle
 
 
 def upload(name):
+    pass
+
+
+def retrieve_data():
     pass
 
 
@@ -58,7 +65,7 @@ def fill_fb(t: list):
 
     ref, _ = query()
 
-    reference("py/DATA_ID")
+    reference(f"{MAIN_ROOT}/DATA_ID")
     for i, q in enumerate(data_id):
         id_ref = ref.child('DATA_ID')
         id_ref.update({
@@ -67,42 +74,42 @@ def fill_fb(t: list):
             }
         })
 
-    reference("py/vragen")
+    reference(f"{MAIN_ROOT}/question")
     for i, q in enumerate(question):
-        q_ref = ref.child('vragen')
+        q_ref = ref.child('question')
         q_ref.update({
             f'question {i}': {
-                'vraag_id': f'{i}',
-               'question': f'{q}'
+                'question_id': f'{i}',
+                'question': f'{q}'
             }
         })
 
-    reference("py/answers")
+    reference(f"{MAIN_ROOT}/answers")
     for i, q in enumerate(answers):
         a_ref = ref.child('answers')
         a_ref.update({
             f'answers {i}': {
-                'antwoord_id': f'{i}',
+                'answers_id': f'{i}',
                 'answers': f'{q}'
             }
         })
 
-    reference("py/field_of_study")
+    reference(f"{MAIN_ROOT}/field_of_study")
     for i, q in enumerate(field_of_study):
         fos_ref = ref.child('field_of_study')
         fos_ref.update({
             f'field_of_study {i}': {
-                'richting_id': f'{i}',
+                'field_of_study_id': f'{i}',
                 'field_of_study': f'{q}'
             }
         })
 
-    reference("py/points")
+    reference(f"{MAIN_ROOT}/points")
     for i, q in enumerate(points):
         p_ref = ref.child('points')
         p_ref.update({
             f'points {i}': {
-                'punten_id': f'{i}',
+                'points_id': f'{i}',
                 'points': f'{q}'
             }
         })
