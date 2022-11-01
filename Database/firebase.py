@@ -17,32 +17,18 @@ def parse(key):
 
 
 def load_data(xlsx_file, sheet_name) -> dict:
-    def get_nth_key(dictionary, n=0):
-        if n < 0:
-            n += len(dictionary)
-
-        for i, key in enumerate(dictionary.keys()):
-            if i == n:
-                return key
-
     # Dictionary in list with lists as pairs and excel columns as keys
-    data = {
-        "ID": [],
-        "Vragen": [],
-        "Antwoorden": [],
-        "Studierichting": [],
-        "Punten": []
-    }
-    
+    data = {}
+
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
-    print(excel)
+    data = excel.to_dict().copy()
 
     return data
 
 
-def fill_fb(data: list):
+def fill_fb(data: dict):
     pass
 
 
