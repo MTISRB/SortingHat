@@ -8,14 +8,14 @@ from firebase_admin import db
 import pandas as pd
 
 
-def parse(key):
+def parse(key: str):
     cred = credentials.Certificate(key)
     firebase_admin.initialize_app(cred, {
         'databaseURL': 'https://mtisrb-default-rtdb.europe-west1.firebasedatabase.app/'
     })
 
 
-def load_data(xlsx_file, sheet_name) -> list:
+def load_data(xlsx_file: str, sheet_name: str) -> list:
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
@@ -31,67 +31,78 @@ def load_data(xlsx_file, sheet_name) -> list:
     return t
 
 
-def fill_fb(t: list):
-    data_id = t[0]
-    vraag = t[1]
-    antwoord = t[2]
-    richting = t[3]
-    punten = t[4]
-
-    ref, _ = query()
-
-    db.reference("py/DATA_ID")
-    for i, q in enumerate(data_id):
-        vragen_ref = ref.child('DATA_ID')
-        vragen_ref.update({
-            f'ID {i}': {
-                'ID': f'{q}',
-            }
-        })
-
-    db.reference("py/vragen")
-    for i, q in enumerate(vraag):
-        vragen_ref = ref.child('vragen')
-        vragen_ref.update({
-            f'vraag {i}': {
-                'vraag_id': f'{i}',
-               'vraag': f'{q}'
-            }
-        })
-
-    db.reference("py/antwoord")
-    for i, q in enumerate(antwoord):
-        vragen_ref = ref.child('antwoord')
-        vragen_ref.update({
-            f'antwoord {i}': {
-                'antwoord_id': f'{i}',
-                'antwoord': f'{q}'
-            }
-        })
-
-    db.reference("py/richting")
-    for i, q in enumerate(richting):
-        vragen_ref = ref.child('richting')
-        vragen_ref.update({
-            f'richting {i}': {
-                'richting_id': f'{i}',
-                'richting': f'{q}'
-            }
-        })
-
-    db.reference("py/punten")
-    for i, q in enumerate(punten):
-        vragen_ref = ref.child('punten')
-        vragen_ref.update({
-            f'punten {i}': {
-                'punten_id': f'{i}',
-                'punten': f'{q}'
-            }
-        })
-    print(ref.get())
+def reference(name: str):
+    db.reference(name)
 
 
 def query() -> tuple:
     ref = db.reference('py/')
     handle = db.reference('py/vragen/')
     return ref, handle
+
+
+def upload(name):
+    pass
+
+
+def print_db(ref):
+    print(ref.get())
+
+
+def fill_fb(t: list):
+    data_id = t[0]
+    question = t[1]
+    answers = t[2]
+    field_of_study = t[3]
+    points = t[4]
+
+    ref, _ = query()
+
+    reference("py/DATA_ID")
+    for i, q in enumerate(data_id):
+        id_ref = ref.child('DATA_ID')
+        id_ref.update({
+            f'ID {i}': {
+                'ID': f'{q}',
+            }
+        })
+
+    reference("py/vragen")
+    for i, q in enumerate(question):
+        q_ref = ref.child('vragen')
+        q_ref.update({
+            f'question {i}': {
+                'vraag_id': f'{i}',
+               'question': f'{q}'
+            }
+        })
+
+    reference("py/answers")
+    for i, q in enumerate(answers):
+        a_ref = ref.child('answers')
+        a_ref.update({
+            f'answers {i}': {
+                'antwoord_id': f'{i}',
+                'answers': f'{q}'
+            }
+        })
+
+    reference("py/field_of_study")
+    for i, q in enumerate(field_of_study):
+        fos_ref = ref.child('field_of_study')
+        fos_ref.update({
+            f'field_of_study {i}': {
+                'richting_id': f'{i}',
+                'field_of_study': f'{q}'
+            }
+        })
+
+    reference("py/points")
+    for i, q in enumerate(points):
+        p_ref = ref.child('points')
+        p_ref.update({
+            f'points {i}': {
+                'punten_id': f'{i}',
+                'points': f'{q}'
+            }
+        })
