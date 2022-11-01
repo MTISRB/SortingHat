@@ -29,20 +29,73 @@ def load_data(xlsx_file, sheet_name) -> list:
 
     for x, _list in enumerate(t):
         t[x] = [item for item in _list if str(item) != 'nan']
-    print(t)
+    #print(t)
 
     return t
 
 
-def fill_fb(data: dict):
-    data = pprint.pprint(data)
-    print(data.values())
+def fill_fb(t: list):
+    data_id = t[0]
+    vraag = t[1]
+    antwoord = t[2]
+    richting = t[3]
+    punten = t[4]
 
+    ref, handle = query()
+
+    handle = db.reference("py/DATA_ID")
+    for i, q in enumerate(data_id):
+        vragen_ref = ref.child('DATA_ID')
+        vragen_ref.update({
+            f'ID {i}': {
+                'ID': f'{q}',
+            }
+        })
+
+    handle = db.reference("py/vragen")
+    for i, q in enumerate(vraag):
+        vragen_ref = ref.child('vragen')
+        vragen_ref.update({
+            f'vraag {i}': {
+                'vraag_id': f'{i}',
+               'vraag': f'{q}'
+            }
+        })
+
+    handle = db.reference("py/antwoord")
+    for i, q in enumerate(antwoord):
+        vragen_ref = ref.child('antwoord')
+        vragen_ref.update({
+            f'antwoord {i}': {
+                'antwoord_id': f'{i}',
+                'antwoord': f'{q}'
+            }
+        })
+
+    handle = db.reference("py/richting")
+    for i, q in enumerate(richting):
+        vragen_ref = ref.child('richting')
+        vragen_ref.update({
+            f'richting {i}': {
+                'richting_id': f'{i}',
+                'richting': f'{q}'
+            }
+        })
+
+    handle = db.reference("py/punten")
+    for i, q in enumerate(punten):
+        vragen_ref = ref.child('punten')
+        vragen_ref.update({
+            f'punten {i}': {
+                'punten_id': f'{i}',
+                'punten': f'{q}'
+            }
+        })
 
 # As an admin, the app has access to read and write all data, regradless of Security Rules
 def query() -> tuple:
     ref = db.reference('py/')
-    handle = db.reference('py/users/')
+    handle = db.reference('py/vragen/')
     return ref, handle
 
 
