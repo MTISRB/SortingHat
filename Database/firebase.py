@@ -1,3 +1,6 @@
+# Required packages for the database:
+# pip install firebase
+# pip install firebase_admin
 
 import firebase_admin
 from firebase_admin import credentials
