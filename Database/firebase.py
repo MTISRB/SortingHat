@@ -16,8 +16,12 @@ def parse(key):
     })
 
 
-def load_data(csv_file) -> list:
-    pass
+def load_data(xlsx_file, sheet_name) -> list:
+    data = []
+    excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
+    print(excel)
+
+    return data
 
 
 def fill_fb(data: list):
