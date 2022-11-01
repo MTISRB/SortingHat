@@ -19,6 +19,8 @@ def parse(key):
 def load_data(xlsx_file, sheet_name) -> list:
     data = []
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_rows', None)
     print(excel)
 
     return data
