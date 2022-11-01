@@ -6,14 +6,29 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-cred = credentials.Certificate("Database/key/mtisrb-firebase-adminsdk-u1zpn-c585cb5c8c.json") 
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://mtisrb-default-rtdb.europe-west1.firebasedatabase.app/'
-})
+
+def parse(key):
+    cred = credentials.Certificate(key)
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': 'https://mtisrb-default-rtdb.europe-west1.firebasedatabase.app/'
+    })
+
+
+def load_data(csv_file) -> list:
+    pass
+
+
+def fill_fb(data: list):
+    pass
+
 
 # As an admin, the app has access to read and write all data, regradless of Security Rules
+def query() -> tuple:
+    ref = db.reference('py/')
+    handle = db.reference('py/users/')
+    return ref, handle
 
-ref = db.reference('py/')
+
 # users_ref = ref.child('users')
 # users_ref.set({
 #     'gebruiker_1': {
@@ -40,7 +55,3 @@ ref = db.reference('py/')
 # })
 
 # hopper_ref = users_ref.child('gebruiker')
-
-handle = db.reference('py/users/')
-
-print(ref.get())
