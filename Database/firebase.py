@@ -7,6 +7,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 import pandas as pd
+import pprint
 
 
 def parse(key):
@@ -18,19 +19,27 @@ def parse(key):
 
 def load_data(xlsx_file, sheet_name) -> dict:
     # Dictionary in list with lists as pairs and excel columns as keys
-    data = {}
+    data = {
+        "ID": [],
+        "Vragen": [],
+        "Antwoorden": [],
+        "Studierichting": [],
+        "Punten": [],
+    }
+    temp = {}
 
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
-    data = excel.to_dict().copy()
+    temp = excel.to_dict().copy()
 
+    print(temp)
     return data
 
 
 def fill_fb(data: dict):
-    pass
-
+    data = pprint.pprint(data)
+    print(data.values())
 
 # As an admin, the app has access to read and write all data, regradless of Security Rules
 def query() -> tuple:
