@@ -17,29 +17,27 @@ def parse(key):
     })
 
 
-def load_data(xlsx_file, sheet_name) -> dict:
-    # Dictionary in list with lists as pairs and excel columns as keys
-    data = {
-        "ID": [],
-        "Vragen": [],
-        "Antwoorden": [],
-        "Studierichting": [],
-        "Punten": [],
-    }
-    temp = {}
-
+def load_data(xlsx_file, sheet_name) -> list:
     excel = pd.read_excel(xlsx_file, sheet_name=sheet_name)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
     temp = excel.to_dict().copy()
+    t = [value for value in temp.values()]
 
-    print(temp)
-    return data
+    for x in range(len(t)):
+        t[x] = [i for i in t[x].values()]
+
+    for x, _list in enumerate(t):
+        t[x] = [item for item in _list if str(item) != 'nan']
+    print(t)
+
+    return t
 
 
 def fill_fb(data: dict):
     data = pprint.pprint(data)
     print(data.values())
+
 
 # As an admin, the app has access to read and write all data, regradless of Security Rules
 def query() -> tuple:
