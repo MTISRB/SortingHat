@@ -20,6 +20,7 @@ class Window:
         _class(self.new)
 
 
+# All classes inherit from the Window interface, extra methods can be added to these classes
 class BeginWindow(Window):
     root: tk.Tk
 
@@ -30,7 +31,7 @@ class BeginWindow(Window):
 
     def init_components(self):
         super().init_components()
-        # override this function in child classes
+        # add components here
 
 
 class EndWindow(Window):
@@ -43,7 +44,7 @@ class EndWindow(Window):
 
     def init_components(self):
         super().init_components()
-        # override this function in child classes
+        # add components here
 
 
 class QuestionWindow(Window):
@@ -56,7 +57,7 @@ class QuestionWindow(Window):
 
     def init_components(self):
         super().init_components()
-        # override this function in child classes
+        # add components here
 
     def correct(self) -> bool:
         pass
