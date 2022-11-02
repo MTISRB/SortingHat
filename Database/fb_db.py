@@ -12,12 +12,13 @@ from pprint import pprint
 
 
 MAIN_ROOT: str = "py"
+DB_URL: str = 'https://mtisrb-default-rtdb.europe-west1.firebasedatabase.app/'
 
 
 def parse(key: str):
     cred = credentials.Certificate(key)
     firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://mtisrb-default-rtdb.europe-west1.firebasedatabase.app/'
+        'databaseURL': DB_URL
     })
 
 
@@ -60,7 +61,9 @@ def upload(name, i, item):
 
 
 def retrieve_data() -> dict:
-    pass
+    data = query()[0]
+
+    return data
 
 
 def print_db():
