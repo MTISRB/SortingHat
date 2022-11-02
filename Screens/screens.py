@@ -9,11 +9,16 @@ class Window:
 
     def __init__(self, master, title):
         self.master = master
+
         # add title, width, height etc.
+        self.master.title(title)
+        self.master.geometry("800x500")
+        self.master.state("zoomed")
+        self.master.wm_iconbitmap("./resources/img/sorting_hat.ico")
 
     def init_components(self):
-        # override this function in child classes
         pass
+        # override this function in child classes
 
     def _new(self, _class):
         self.new = tk.Toplevel(self.master)
