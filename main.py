@@ -20,6 +20,47 @@ def main():
         [sg.Button("Begin de Sorting Experience!")]
     ]
 
+
+    #CODE ELISE
+    col1 = [[sg.Image('resources/img/sorting_hat.png', size=(300, 300))]]
+    col2 = [[sg.Text("Hier komt de vraag")],
+            [sg.Radio('Antwoord 1', "RADIO1")],
+            [sg.Radio('Antwoord 2', "RADIO1")],
+            [sg.Radio('Antwoord 3', "RADIO1")],
+            [sg.Radio('Antwoord 4', "RADIO1")],
+            [sg.Button('Terug'), sg.Button('Verder')]]
+
+    layoutVragen = [[sg.Column(col1, element_justification='c'),
+                    sg.Column(col2, element_justification='c')]]
+
+    windowVragen = sg.Window('The Sorting Experience', layoutVragen, element_justification='c', size=(800, 600)).Finalize()
+    windowVragen.Maximize()
+    while True:
+        event, values = windowVragen.read()
+        if event == sg.WIN_CLOSED or event == "Exit":
+            break
+
+    windowVragen.close()
+    #EIND CODE ELISE
+
+    #CODE LESLIE
+    layoutEind = [[sg.Text('Je resultaat is binnen!')],
+              [sg.Text('Jou aanbevolen specialisatie is:'), sg.InputText()],
+              [sg.Button('verder'), sg.Button('opnieuw')],
+              [sg.Image('/Users/leslie2k4/pythonProject/sorting testing/the_sorting_hat.png')]]
+
+    windowEind = sg.Window('resultaat', layoutEind, size=(800, 600), element_justification="c")
+
+    while True:
+        event, values = windowEind.read()
+        if event == sg.WIN_CLOSED or event == 'Cancel':
+            break
+
+    windowEind.close()
+    #EIND LESLIE
+
+
+
     # creates the main window, finalizes it and makes it start in full screen mode
     window = sg.Window('Sorting Experience', layoutWelcome, element_justification='c').finalize()
     window.Maximize()
