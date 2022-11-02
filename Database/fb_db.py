@@ -44,8 +44,16 @@ def query() -> tuple:
     return ref, handle
 
 
-def upload(name):
-    pass
+def upload(name, i, item):
+    ref, _ = query()
+    reference(f"{MAIN_ROOT}/{name}")
+    t_ref = ref.child(f'{name}')
+    t_ref.update({
+        f'{name} {i}': {
+            f'{name}_id': f'{i}',
+            f'{name}': f'{item}'
+        }
+    })
 
 
 def retrieve_data():
