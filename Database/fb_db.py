@@ -60,10 +60,14 @@ def upload(name, i, item):
     })
 
 
-def retrieve_data() -> dict:
-    data = query()[0]
+def retrieve_data() -> list:
+    raw_data = query()[0].get()
+    new_data = []
 
-    return data
+    for x in raw_data:
+        k = (x, raw_data[x])
+        new_data.append(k)
+    return new_data
 
 
 def print_db():
