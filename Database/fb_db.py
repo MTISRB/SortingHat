@@ -103,31 +103,43 @@ def fill_fb(t: list):
         })
 
     reference(f"{MAIN_ROOT}/answers")
+    count = 0
     for i, q in enumerate(answers):
         a_ref = ref.child('answers')
         a_ref.update({
             f'answers {i}': {
-                'answers_id': f'{i}',
+                'answers_id': f'{count}',
                 'answers': f'{q}'
             }
         })
+        p = i+1
+        if p % 4 == 0:
+            count += 1
 
     reference(f"{MAIN_ROOT}/field_of_study")
+    count = 0
     for i, q in enumerate(field_of_study):
         fos_ref = ref.child('field_of_study')
         fos_ref.update({
             f'field_of_study {i}': {
-                'field_of_study_id': f'{i}',
+                'field_of_study_id': f'{count}',
                 'field_of_study': f'{q}'
             }
         })
+        p = i+1
+        if p % 4 == 0:
+            count += 1
 
     reference(f"{MAIN_ROOT}/points")
+    count = 0
     for i, q in enumerate(points):
         p_ref = ref.child('points')
         p_ref.update({
             f'points {i}': {
-                'points_id': f'{i}',
+                'points_id': f'{count}',
                 'points': f'{q}'
             }
         })
+        p = i+1
+        if p % 4 == 0:
+            count += 1
