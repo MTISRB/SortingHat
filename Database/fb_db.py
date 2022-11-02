@@ -1,11 +1,14 @@
-# Required packages for the database:
+# ------ Required packages for the database: ----------
 # pip install firebase
 # pip install firebase_admin
+# pip install pandas
+# pip install openpyxl
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import pandas as pd
+from pprint import pprint
 
 
 MAIN_ROOT: str = "py"
@@ -56,12 +59,12 @@ def upload(name, i, item):
     })
 
 
-def retrieve_data():
+def retrieve_data() -> dict:
     pass
 
 
-def print_db(ref):
-    print(ref.get())
+def print_db():
+    pprint(query()[0].get())
 
 
 def fill_fb(t: list):
