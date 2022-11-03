@@ -39,7 +39,7 @@ class LoadResults:
         return col1, col2
 
 
-class GenerateContent:
+class Content:
     def __init__(self):
         pass
 

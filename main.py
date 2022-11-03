@@ -3,7 +3,7 @@ import algorithm as a
 import PySimpleGUI as sg
 from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
-from Screens.screens import GenerateContent
+from Screens.screens import Content
 
 
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
@@ -40,17 +40,16 @@ def main():
     sg.theme('Default1')
 
 #   question screen
-    q_col1, q_col2 = LoadQuestion.question_layout("Hier komt de vraag", "Antwoord 1", "Antwoord 2",
-                                              "Antwoord 3", "Antwoord 4")
+    q_col1, q_col2 = LoadQuestion.question_layout("Hier komt de vraag", "Antwoord 1", "Antwoord 2", "Antwoord 3", "Antwoord 4")
     # end sceen
     r_col1, r_col2 = LoadResults.result_layout("Resultaat!")
 
     # content
-    content = GenerateContent.draw_screens(q_col1, q_col2, r_col1, r_col2)
+    content = Content.draw_screens(q_col1, q_col2, r_col1, r_col2)
 
     # create the window, finalize it and start it at full screen
     window = sg.Window('Sorting Experience', content, element_justification='c',
-                       icon="resources/img/sorting_hat.ico").finalize()
+                       icon="resources/img/sorting_hat.ico", resizable=True).finalize()
     window.Maximize()
 
     # creates the main window, finalizes it and makes it start in full screen mode
@@ -69,18 +68,18 @@ def main():
                     title="The boy who lived...",
                     icon="resources/img/sorting_hat.ico")
 
-                enteredname = ""
+                entered_name = ""
             elif values["-name-"] == "":
                 sg.popup("Je moet een geldige naam invoeren",
                          title="Stupify!",
                          icon="resources/img/sorting_hat.ico")
 
-                enteredname = ""
+                entered_name = ""
             else:
-                enteredname = values["-name-"]
+                entered_name = values["-name-"]
 
-            if enteredname != "":
-                GenerateContent.switchcontent(window, "-welcome-", "-questions-")
+            if entered_name != "":
+                Content.switchcontent(window, "-welcome-", "-questions-")
 
         elif event == "-EnterQuestion-":
             # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt bij het vragen scherm,
@@ -97,9 +96,9 @@ def main():
             elif values["-Antwoord4-"]:
                 # Geeft aan in de terminal dat het vierde antwoord gekozen is
                 print("Gekozen antwoord is 4")
-            GenerateContent.switchcontent(window, "-questions-", '-end-')
+            Content.switchcontent(window, "-questions-", '-end-')
         elif event == "-close-":
-                window.close()
+            window.close()
         else:
             window.close()
 
