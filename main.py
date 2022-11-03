@@ -5,22 +5,36 @@ from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
 from Screens.screens import GenerateContent
 
+
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
-    #f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-0b5778f94d.json', fill=True)
+    f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-13e20fa0ad.json', fill=False)
 
-    # a.Algorithm.init(data=[
-    #    f.get_data("answers"),
-    #    f.get_data("field_of_study"),
-    #    f.get_data("question"),
-    #    f.get_data("points"),
-    #    f.get_data("user_answers"),
-    # ])
-    #
-    # a.Algorithm.cs()
+    # f.upload("user_answers", 0, 1)
+    # f.upload("user_answers", 1, 0)
+    # f.upload("user_answers", 2, 2)
+    # f.upload("user_answers", 3, 3)
+    # f.upload("user_answers", 4, 2)
+    # f.upload("user_answers", 5, 0)
+    # f.upload("user_answers", 6, 1)
+    # f.upload("user_answers", 7, 3)
+    # f.upload("user_answers", 8, 3)
+    # f.upload("user_answers", 9, 0)
+    # f.upload("user_answers", 10, 3)
+    # f.upload("user_answers", 11, 2)
+    # f.upload("user_answers", 12, 1)
+    # f.upload("user_answers", 13, 2)
+    # f.upload("user_answers", 14, 3)
 
-    #f.parse('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-0b5778f94d.json')
-    f.fill_fb(f.load_data("resources/Database.xlsx", "database"))
+    a.Algorithm.init(data=[
+       f.get_data("answers"),
+       f.get_data("field_of_study"),
+       f.get_data("question"),
+       f.get_data("points"),
+       f.get_data("user_answers"),
+    ])
+
+    print(a.Algorithm.cs())
 
     # choose theme
     sg.theme('Default1')

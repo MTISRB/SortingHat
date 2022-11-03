@@ -42,6 +42,7 @@ class LoadResults:
 class GenerateContent:
     def __init__(self):
         pass
+
     @staticmethod
     def draw_screens(q_col1, q_col2, r_col1, r_col2):
         screens = [[
