@@ -1,4 +1,3 @@
-import traceback
 from utils import sort
 
 
