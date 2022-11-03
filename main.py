@@ -3,6 +3,7 @@ import algorithm as a
 import PySimpleGUI as sg
 from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
+from Screens.screens import GenerateContent
 
 # db_replacement = [
 #     {
@@ -41,20 +42,6 @@ from Screens.screens import LoadResults
 
 # function that generates a question layout for each entry
 
-
-# function to close the current content frame and open the next one
-def switchcontent(activewindow, currentc, nextc):
-    """
-    :param activewindow: The window in which the content is placed
-    :param currentc: The current key of the content-frame that has to disappear
-    :param nextc: The key of the content-frame you want to display next
-    :return:
-    """
-    activewindow[currentc].update(visible=False)
-    activewindow[nextc].update(visible=True)
-    activewindow.refresh()
-
-
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
     # f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-13e20fa0ad.json', fill=True)
@@ -77,36 +64,14 @@ def main():
     # choose theme
     sg.theme('Default1')
 
-    q_col1, q_col2 = LoadQuestion.questionlayout(LoadQuestion, "Hier komt de vraag", "Antwoord 1", "Antwoord 2",
+    q_col1, q_col2 = LoadQuestion.question_layout("Hier komt de vraag", "Antwoord 1", "Antwoord 2",
                                               "Antwoord 3", "Antwoord 4")
+    r_col1, r_col2 = LoadResults.result_layout("Resultaat!")
 
-    r_col1, r_col2 = LoadResults.resultlayout(LoadResults, "Resultaat!")
-
-    # The different screens, put into frames
-    screens = [[
-        sg.Frame('', [
-            [sg.Image('resources/img/sorting_hat.png')],
-            [sg.Text('Welkom bij de Sorting Experience! Voer hieronder je naam in!')],
-            [sg.Input(key="-name-")],
-            [sg.Button("Begin de Sorting Experience!", key="-beginExperience-")]],
-                 visible=True, border_width=0, element_justification='c', key="-welcome-"),
-
-        sg.Frame('', [
-            [sg.VPush()],
-            [sg.Push(), sg.Column(q_col1), sg.Column(q_col2), sg.Push()],
-            [sg.VPush()]],
-                 visible=False, border_width=0, element_justification='c', key="-questions-"),
-
-        sg.Frame('', [
-            [sg.VPush()],
-            [sg.Push(), sg.Column(r_col1), sg.Column(r_col2), sg.Push()],
-            [sg.VPush()]],
-                 visible=False, border_width=0, element_justification='c', key="-end-")
-    ]
-    ]
+    content = GenerateContent.draw_screens(q_col1, q_col2, r_col1, r_col2)
 
     # create the window, finalize it and start it at full screen
-    window = sg.Window('Sorting Experience', screens, element_justification='c',
+    window = sg.Window('Sorting Experience', content, element_justification='c',
                        icon="resources/img/sorting_hat.ico").finalize()
     window.Maximize()
 
@@ -138,7 +103,7 @@ def main():
                     enteredname = values["-name-"]
 
                 if enteredname != "":
-                    switchcontent(window, "-welcome-", "-questions-")
+                    GenerateContent.switchcontent(window, "-welcome-", "-questions-")
 
             case "-EnterQuestion-":
 
@@ -156,7 +121,7 @@ def main():
                 elif values["-Antwoord4-"]:
                     # Geeft aan in de terminal dat het vierde antwoord gekozen is
                     print("Gekozen antwoord is 4")
-                switchcontent(window, "-questions-", '-end-')
+                GenerateContent.switchcontent(window, "-questions-", '-end-')
             case "-close-":
                 window.close()
 
