@@ -7,6 +7,7 @@ from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
 from Screens.screens import Content
 
+
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
     f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-13e20fa0ad.json', fill=False)
@@ -180,6 +181,16 @@ def main():
             elif Content.index == 14:
                 Content.switch_content(window, "-questions_14-", '-questions_15-')
             elif Content.index == 15:
+                a.Algorithm.init(data=[
+                   f.get_data("answers"),
+                   f.get_data("field_of_study"),
+                   f.get_data("question"),
+                   f.get_data("points"),
+                   f.get_data("user_answers"),
+                ])
+
+                result = a.Algorithm.cs()
+                
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
             window.close()
