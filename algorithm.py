@@ -34,17 +34,21 @@ class Algorithm:
 
     @staticmethod
     def cs() -> list:
-        scores = [0, 0, 0, 0]  #SE, IICT, FICT, DB
+        scores = [0, 0, 0, 0]  #FICT, IICT, SE, DB
 
         sorted_answers = sort(Algorithm.answers, "answers", "answers_id")
         sorted_fos = sort(Algorithm.fos, "field_of_study", "field_of_study_id")
         sorted_points = sort(Algorithm.points, "points", "points_id")
+        sorted_u_answers = sort(Algorithm.user_answers, "user_answers", "user_answers_id")
 
         print("answers", sorted_answers)
         print("richting", sorted_fos)
         print("punten", sorted_points)
-        
-        for a, b, c in zip(sorted_answers, sorted_fos, sorted_points):
-            print(a, b, c)
+        print("user answers", sorted_u_answers)
+
+        for i, [*l] in enumerate(zip(sorted_u_answers, sorted_answers, sorted_fos, sorted_points)):
+            scores[int(l[0][0])] += int(l[3][int(l[0][0])])
+
+        print(scores)
 
         return scores
