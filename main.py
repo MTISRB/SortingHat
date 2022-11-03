@@ -10,33 +10,7 @@ from Screens.screens import Content
 
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
-    f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-13e20fa0ad.json', fill=False)
-
-    # f.upload("user_answers", 0, 1)
-    # f.upload("user_answers", 1, 0)
-    # f.upload("user_answers", 2, 2)
-    # f.upload("user_answers", 3, 3)
-    # f.upload("user_answers", 4, 2)
-    # f.upload("user_answers", 5, 0)
-    # f.upload("user_answers", 6, 1)
-    # f.upload("user_answers", 7, 3)
-    # f.upload("user_answers", 8, 3)
-    # f.upload("user_answers", 9, 0)
-    # f.upload("user_answers", 10, 3)
-    # f.upload("user_answers", 11, 2)
-    # f.upload("user_answers", 12, 1)
-    # f.upload("user_answers", 13, 2)
-    # f.upload("user_answers", 14, 3)
-
-    # a.Algorithm.init(data=[
-    #    f.get_data("answers"),
-    #    f.get_data("field_of_study"),
-    #    f.get_data("question"),
-    #    f.get_data("points"),
-    #    f.get_data("user_answers"),
-    # ])
-    #
-    # print(a.Algorithm.cs())
+    f.init('../Scrolls5_key.json', fill=False)
 
     # choose theme
 
@@ -97,7 +71,7 @@ def main():
         event, values = window.read()
         index = 1
 
-        print(values, event)
+        #print(values, event)
 
         if event == sg.WIN_CLOSED:
             break
@@ -123,9 +97,9 @@ def main():
             if entered_name != "":
                 Content.switch_content(window, "-welcome-", "-questions_1-")
         elif "Next" in event:
-            # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt bij het vragen scherm,
+            # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt  het vragen scherm,
             # en je kan hier zien welk van de vier keuzes gekozen is
-            print(True, Content.index)
+            #print(True, Content.index)
             temp = values.copy()
             temp.pop("-name-", None)
             # index = 1
@@ -190,7 +164,35 @@ def main():
                 ])
 
                 result = a.Algorithm.cs()
-                
+
+                score_list = []
+                for each in result:
+                    score_list.append(each)
+                print(score_list)
+
+                spec: int = score_list.index(max(score_list))
+
+                if spec == 0:
+                    sg.popup(
+                        "Jouw specialisatie is: FICT ",
+                        title="Jouw Specialisatie",
+                        icon="resources/img/sorting_hat.ico")
+                if spec == 1:
+                    sg.popup(
+                        "Jouw specialisatie is: IICT ",
+                        title="Jouw Specialisatie",
+                        icon="resources/img/sorting_hat.ico")
+                if spec == 2:
+                    sg.popup(
+                        "Jouw specialisatie is: SE ",
+                        title="Jouw Specialisatie",
+                        icon="resources/img/sorting_hat.ico")
+                if spec == 3:
+                    sg.popup(
+                        "Jouw specialisatie is: DE ",
+                        title="Jouw Specialisatie",
+                        icon="resources/img/sorting_hat.ico")         
+
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
             window.close()
