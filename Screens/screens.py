@@ -1,68 +1,82 @@
-import tkinter as tk
-import tkinter.constants as tk_cons
+import PySimpleGUI as sg
 
 
-class Window:
-    master: tk.Tk
-    width: int = 0
-    height: int = 0
-
-    def __init__(self, master, title):
-        self.master = master
-
-        # add title, width, height etc.
-        self.master.title(title)
-        self.master.geometry("800x500")
-        self.master.state("zoomed")
-        self.master.wm_iconbitmap("./resources/img/sorting_hat.ico")
-
-    def init_components(self):
+class LoadQuestion:
+    def __init__(self):
         pass
-        # override this function in child classes
 
-    def _new(self, _class):
-        self.new = tk.Toplevel(self.master)
-        _class(self.new)
+    @staticmethod
+    def question_layout(question, ant1, ant2, ant3, ant4):
+        font = ("Helvetica", 25)
+        font_s = ("Helvetica", 15)
 
+        col1 = [[sg.Image('resources/img/sorting_hat-3.png')]]
+        col2 = [[sg.Text(question, key='-text-', font=font)],
+                [sg.Radio(ant1, "RADIO1", key="-Antwoord1-", font=font_s)],
+                [sg.Radio(ant2, "RADIO1", key="-Antwoord2-", font=font_s)],
+                [sg.Radio(ant3, "RADIO1", key="-Antwoord3-", font=font_s)],
+                [sg.Radio(ant4, "RADIO1", key="-Antwoord4-", font=font_s)],
+                [sg.Button('< Terug', font=font_s, size=7),
+                 sg.Button('Verder >', font=font_s, size=7, key="-EnterQuestion-")]]
 
-# All classes inherit from the Window interface, extra methods can be added to these classes
-class BeginWindow(Window):
-    root: tk.Tk
-
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
-
-    def init_components(self):
-        super().init_components()
-        # add components here
+        return col1, col2
 
 
-class EndWindow(Window):
-    root: tk.Tk
-
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
-
-    def init_components(self):
-        super().init_components()
-        # add components here
-
-
-class QuestionWindow(Window):
-    root: tk.Tk
-
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
-
-    def init_components(self):
-        super().init_components()
-        # add components here
-
-    def correct(self) -> bool:
+class LoadResults:
+    def __init__(self):
         pass
+
+    @staticmethod
+    def result_layout(result):
+        font = ("Helvetica", 25)
+        font_s = ("Helvetica", 15)
+
+        col1 = [[sg.Image("resources/img/sorting_hat-2.png")]]
+        col2 = [[sg.Text('Je resultaat is binnen', font=font)],
+                [sg.Text('Jij past bij:', font=font_s), sg.Text(result, font=font_s)],
+                [sg.Button('Sluiten', key="-close-")]]
+
+        return col1, col2
+
+
+class Content:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def draw_screens(q_col1, q_col2, r_col1, r_col2):
+        screens = [[
+            sg.Frame('', [
+                [sg.Image('resources/img/sorting_hat.png')],
+                [sg.Text('Welkom bij de Sorting Experience! Voer hieronder je naam in!')],
+                [sg.Input(key="-name-")],
+                [sg.Button("Begin de Sorting Experience!", key="-beginExperience-")]],
+                     visible=True, border_width=0, element_justification='c', key="-welcome-"),
+
+            sg.Frame('', [
+                [sg.VPush()],
+                [sg.Push(), sg.Column(q_col1), sg.Column(q_col2), sg.Push()],
+                [sg.VPush()]],
+                     visible=False, border_width=0, element_justification='c', key="-questions-"),
+
+            sg.Frame('', [
+                [sg.VPush()],
+                [sg.Push(), sg.Column(r_col1), sg.Column(r_col2), sg.Push()],
+                [sg.VPush()]],
+                     visible=False, border_width=0, element_justification='c', key="-end-")
+        ]
+        ]
+        return screens
+
+    @staticmethod
+    def switchcontent(activewindow, currentc, nextc):
+        """
+        # Changes the showing content
+        :param activewindow: The window in which the content is placed
+        :param currentc: The current key of the content-frame that has to disappear
+        :param nextc: The key of the content-frame you want to display next
+        :return:
+        """
+        activewindow[currentc].update(visible=False)
+        activewindow[nextc].update(visible=True)
+        activewindow.refresh()
