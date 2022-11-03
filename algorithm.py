@@ -18,6 +18,9 @@ def sort(ds, data: str, d_id: str) -> list:
 
 
 class Algorithm:
+    def __init__(self):
+        pass
+
     answers: tuple
     fos: tuple
     points: tuple
@@ -35,20 +38,14 @@ class Algorithm:
     @staticmethod
     def cs() -> list:
         scores = [0, 0, 0, 0]  #FICT, IICT, SE, DB
+        tot_scores = [36, 40, 40, 32]  #FICT, IICT, SE, DB
 
         sorted_answers = sort(Algorithm.answers, "answers", "answers_id")
         sorted_fos = sort(Algorithm.fos, "field_of_study", "field_of_study_id")
         sorted_points = sort(Algorithm.points, "points", "points_id")
         sorted_u_answers = sort(Algorithm.user_answers, "user_answers", "user_answers_id")
 
-        print("answers", sorted_answers)
-        print("richting", sorted_fos)
-        print("punten", sorted_points)
-        print("user answers", sorted_u_answers)
-
         for i, [*l] in enumerate(zip(sorted_u_answers, sorted_answers, sorted_fos, sorted_points)):
             scores[int(l[0][0])] += int(l[3][int(l[0][0])])
 
-        print(scores)
-
-        return scores
+        return [*zip(scores, tot_scores)]
