@@ -4,8 +4,42 @@ import PySimpleGUI as sg
 from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
 
+# db_replacement = [
+#     {
+#         "vraag_nummer": 0,
+#         "vraag_tekst": "In welke richting heb je al interesse?",
+#         "vraag_antwoorden": [["Forensische ICT", "FICT", 4,]
+#                              ["Interactie-Technologie", "IICT", 4,]
+#                              ["Software Engineering", "SE", 4,]
+#                              ["Databases", "DB", 4]]
+#     },
+#     {
+#         "vraag_nummer": 1,
+#         "vraag_tekst": "Welk van deze karaktereigenschappen is je sterkste punt?",
+#         "vraag_antwoorden": [["analytisch denken", "FICT", 4,]
+#                              ["samenwerken", "IICT", 4,]
+#                              ["problem solving", "SE", 4,]
+#                              ["precies werken", "DB", 4]]
+#     },
+#     {
+#         "vraag_nummer": 2,
+#         "vraag_tekst": "Welk van deze karaktereigenschappen is je zwakste punt?",
+#         "vraag_antwoorden": [["analytisch denken", "FICT", 4]
+#                              ["samenwerken", "IICT", 5]
+#                              ["problem solving", "SE", "4,]
+#                              ["precies werken", "punten_voor_specialisatie": "DB", "4]]
+#     },
+#     {
+#         "vraag_nummer": 3,
+#         "vraag_tekst": "Welk van deze omschrijvingen zijn het beste van toepassing?",
+#         "vraag_antwoorden": [["Het liefst werk ik met mensen", "FICT", 4]
+#                              ["Ik kan met anderen werken als het nodig is", "IICT", 4]
+#                              ["Ik kan goed samenwerken in een team", "SE", 4]
+#                              ["Ik werk liever zoveel mogelijk alleen", "DB", 4]]
+#     }
+# ]
 
-# function that reads the placeholder dictionary and generates a question for each entry
+# function that generates a question layout for each entry
 
 
 # function to close the current content frame and open the next one
@@ -44,7 +78,7 @@ def main():
     sg.theme('Default1')
 
     q_col1, q_col2 = LoadQuestion.questionlayout(LoadQuestion, "Hier komt de vraag", "Antwoord 1", "Antwoord 2",
-                                             "Antwoord 3", "Antwoord 4")
+                                              "Antwoord 3", "Antwoord 4")
 
     r_col1, r_col2 = LoadResults.resultlayout(LoadResults, "Resultaat!")
 
@@ -107,6 +141,7 @@ def main():
                     switchcontent(window, "-welcome-", "-questions-")
 
             case "-EnterQuestion-":
+
                 # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt bij het vragen scherm,
                 # en je kan hier zien welk van de vier keuzes gekozen is
                 if values["-Antwoord1-"]:
