@@ -36,44 +36,39 @@ def main():
 
 
     #CODE ELISE
-    kop = ("Helvetica", 25)
-    platte_tekst = ("Helvetica", 15)
+    col1 = [[sg.Image('resources/img/sorting_hat.png', size=(300, 300))]]
+    col2 = [[sg.Text("Hier komt de vraag")],
+            [sg.Radio('Antwoord 1', "RADIO1")],
+            [sg.Radio('Antwoord 2', "RADIO1")],
+            [sg.Radio('Antwoord 3', "RADIO1")],
+            [sg.Radio('Antwoord 4', "RADIO1")],
+            [sg.Button('Terug'), sg.Button('Verder')]]
 
-    col1 = [[sg.Image('resources/img/sorting_hat-3.png')]]
-    col2 = [[sg.Text("Hier komt de vraag", key='-text-', font=kop)],
-            [sg.Radio('Antwoord 1', "RADIO1", font=platte_tekst)],
-            [sg.Radio('Antwoord 2', "RADIO1", font=platte_tekst)],
-            [sg.Radio('Antwoord 3', "RADIO1", font=platte_tekst)],
-            [sg.Radio('Antwoord 4', "RADIO1", font=platte_tekst)],
-            [sg.Button('< Terug', font=platte_tekst, size=7), sg.Button('Verder >', font=platte_tekst, size=7)]]
+    layoutVragen = [[sg.Column(col1, element_justification='c'),
+                    sg.Column(col2, element_justification='c')]]
 
-    layoutVragen = [[sg.VPush()],
-                    [sg.Push(), sg.Column(col1), sg.Column(col2), sg.Push()],
-                    [sg.VPush()]]
-
-    windowVragen = sg.Window('The Sorting Experience', layoutVragen, element_justification='c',
-                             size=(1600, 900)).Finalize()
+    windowVragen = sg.Window('The Sorting Experience', layoutVragen, element_justification='c', size=(800, 600)).Finalize()
     windowVragen.Maximize()
+    while True:
+        event, values = windowVragen.read()
+        if event == sg.WIN_CLOSED or event == "Exit":
+            break
+
+    windowVragen.close()
     #EIND CODE ELISE
 
     #CODE LESLIE
-    sg.theme("LightGreen")
+    layoutEind = [[sg.Text('Je resultaat is binnen!')],
+              [sg.Text('Jou aanbevolen specialisatie is:'), sg.InputText()],
+              [sg.Button('verder'), sg.Button('opnieuw')],
+              [sg.Image('/Users/leslie2k4/pythonProject/sorting testing/the_sorting_hat.png')]]
 
-    kop_text = ('Helvetica', 25)
-    platte_text = ('Helvectica', 15)
+    windowEind = sg.Window('resultaat', layoutEind, size=(800, 600), element_justification="c")
 
-    col1 = [sg.Image(r'C:\Users\leslie2k4\PycharmProjects\sorting testing\sorting_hat-2.png')],
-    col2 = [sg.Text('Je resultaat is binnen', font=kop_text)], \
-           [sg.Text('Jij past bij:', font=platte_text), sg.Text('*result*', font=platte_text)],
-    col3 = [sg.Text("")], \
-           [sg.Button('opnieuw')]
-
-    layoutEind = [[sg.VPush()],
-                  [sg.Push(), sg.Column(col1), sg.Column(col2), sg.Column(col3), sg.Push()],
-                  [sg.VPush()]]
-
-    windowEind = sg.Window("The Sorting Experience", layoutEind, size=(1920, 1080))
-    event, values = windowEind.read()
+    while True:
+        event, values = windowEind.read()
+        if event == sg.WIN_CLOSED or event == 'Cancel':
+            break
 
     windowEind.close()
     #EIND LESLIE
