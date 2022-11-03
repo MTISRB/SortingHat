@@ -1,68 +1,35 @@
 import tkinter as tk
 import tkinter.constants as tk_cons
+import PySimpleGUI as sg
 
 
-class Window:
-    master: tk.Tk
-    width: int = 0
-    height: int = 0
+class LoadQuestion:
 
-    def __init__(self, master, title):
-        self.master = master
+    def questionlayout(self, vraag, ant1, ant2, ant3, ant4):
+        kop = ("Helvetica", 25)
+        platte_tekst = ("Helvetica", 15)
 
-        # add title, width, height etc.
-        self.master.title(title)
-        self.master.geometry("800x500")
-        self.master.state("zoomed")
-        self.master.wm_iconbitmap("./resources/img/sorting_hat.ico")
+        col1 = [[sg.Image('resources/img/sorting_hat-3.png')]]
+        col2 = [[sg.Text(vraag, key='-text-', font=kop)],
+                [sg.Radio(ant1, "RADIO1", key="-Antwoord1-", font=platte_tekst)],
+                [sg.Radio(ant2, "RADIO1", key="-Antwoord2-", font=platte_tekst)],
+                [sg.Radio(ant3, "RADIO1", key="-Antwoord3-", font=platte_tekst)],
+                [sg.Radio(ant4, "RADIO1", key="-Antwoord4-", font=platte_tekst)],
+                [sg.Button('< Terug', font=platte_tekst, size=7),
+                 sg.Button('Verder >', font=platte_tekst, size=7, key="-EnterQuestion-")]]
 
-    def init_components(self):
-        pass
-        # override this function in child classes
-
-    def _new(self, _class):
-        self.new = tk.Toplevel(self.master)
-        _class(self.new)
+        return col1, col2
 
 
-# All classes inherit from the Window interface, extra methods can be added to these classes
-class BeginWindow(Window):
-    root: tk.Tk
+class LoadResults:
 
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
+    def resultlayout(self, result):
+        kop_text = ("Helvetica", 25)
+        platte_text = ("Helvetica", 15)
 
-    def init_components(self):
-        super().init_components()
-        # add components here
+        col1 = [[sg.Image("resources/img/sorting_hat-2.png")]]
+        col2 = [[sg.Text('Je resultaat is binnen', font=kop_text)],
+                [sg.Text('Jij past bij:', font=platte_text), sg.Text(result, font=platte_text)],
+                [sg.Button('Sluiten', key="-close-")]]
 
-
-class EndWindow(Window):
-    root: tk.Tk
-
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
-
-    def init_components(self):
-        super().init_components()
-        # add components here
-
-
-class QuestionWindow(Window):
-    root: tk.Tk
-
-    def __init__(self, root):
-        super().__init__(root, "[Title here!]")
-        self.root = root
-        # add title, width, height etc.
-
-    def init_components(self):
-        super().init_components()
-        # add components here
-
-    def correct(self) -> bool:
-        pass
+        return col1, col2
