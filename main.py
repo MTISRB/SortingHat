@@ -193,6 +193,7 @@ def main():
                 score_list = []
                 for each in result:
                     score_list.append(each)
+                score_list[0][1] += 4
 
                 spec: int = score_list.index(max(score_list))
 
