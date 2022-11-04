@@ -103,22 +103,26 @@ def main():
             sg.popup(
                 "je gaat veel moeten programmeren, werken met complexe software en het onderhouden daarvan. maar je zal ook veel samenwerken met andere software engineers. je denkt 'outside the box' en geen enkele challenge is te groot voor jou.",
                 title="Software Engineering",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_software_engineering.ico")
         elif event == "-iict-":
             sg.popup(
                 'Deze specialisatie vereist veel technische affiniteit, veel kennis over meerdere specialisaties en meerdere IT gebieden. Je gaat storing verhelpen en daarbij heb je een analytisch vermogen nodig zoals de vaardigheid om toekomst gericht te denken.',
                 title="Interactie Technologie",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_interactie_technologie.ico")
         elif event == "-fict-":
             sg.popup(
                 'Je gaat digitale sporen opzoeken en digitaal gedrag analyseren, je gaat ook veel documenteren en je moet kennis hebben over relevante wetgevingen. Cyber security is hier een groot deel van.',
                 title="Forensisch ict",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_forensische_ICT.ico")
         elif event == "-data-":
             sg.popup(
                 'jij kan goed patronen herkennen. je leeft voor data organiseren en analyseren. daarnaast werk je veel samen en ben je erg resultaatgericht.',
                 title="Data Engineering",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_database.ico")
         elif event == "-goToQuestions-":
             Content.switch_content(window, "-banner-", "-questions_1-")
 
