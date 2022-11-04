@@ -11,6 +11,7 @@ from Screens.screens import Content
 
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
+    hidden_class_code = ""
     f.init('../Scrolls5_key.json', fill=False)
 
     # choose theme
@@ -103,25 +104,42 @@ def main():
                 title="Software Engineering",
                 keep_on_top=True,
                 icon="resources/img/logo_software_engineering.ico")
+            hidden_class_code += "1"
         elif event == "-iict-":
             sg.popup(
                 'Deze specialisatie vereist veel technische affiniteit, veel kennis over meerdere specialisaties en meerdere IT gebieden. Je gaat storing verhelpen en daarbij heb je een analytisch vermogen nodig zoals de vaardigheid om toekomst gericht te denken.',
                 title="Interactie Technologie",
                 keep_on_top=True,
                 icon="resources/img/logo_interactie_technologie.ico")
+            hidden_class_code += "2"
         elif event == "-fict-":
             sg.popup(
                 'Je gaat digitale sporen opzoeken en digitaal gedrag analyseren, je gaat ook veel documenteren en je moet kennis hebben over relevante wetgevingen. Cyber security is hier een groot deel van.',
                 title="Forensisch ict",
                 keep_on_top=True,
                 icon="resources/img/logo_forensische_ICT.ico")
+            hidden_class_code += "3"
         elif event == "-data-":
             sg.popup(
                 'jij kan goed patronen herkennen. je leeft voor data organiseren en analyseren. daarnaast werk je veel samen en ben je erg resultaatgericht.',
                 title="Data Engineering",
                 keep_on_top=True,
                 icon="resources/img/logo_database.ico")
+            hidden_class_code += "4"
         elif event == "-goToQuestions-":
+            if hidden_class_code == "2143":
+                sg.popup(
+                    "Jij bent een echte speurder, en dus kom je in aanmerking voor de Hippogriff class! "
+                    "Hippogriffs zijn trotse en nobele dieren, met een eergevoel!",
+                    title="Hippogriff",
+                    keep_on_top=True,
+                    icon="resources/img/Hippogriff.ico")
+            elif hidden_class_code == "44444":
+                sg.popup(
+                    "Een echte Slytherin blijft trouw aan zijn of haar house, en jij hebt bewezen dat ondankt de verschillende namen, Jij Slytherin overal kan herkennen...",
+                    title="The chamber of secrets",
+                    keep_on_top=True,
+                icon="resources/img/Snake.ico")
             Content.switch_content(window, "-banner-", "-questions_1-")
 
         elif "Next" in event:
