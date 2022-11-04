@@ -5,6 +5,7 @@ import utils
 
 from Screens.screens import LoadQuestion
 from Screens.screens import LoadResults
+from Screens.screens import LoadBanner
 from Screens.screens import Content
 
 
@@ -22,7 +23,8 @@ def main():
     sorted_questions = utils.sort(f.get_data("question"), "question", "question_id")
     sorted_answers = utils.sort(f.get_data("answers"), "answers", "answers_id")
 
-    sg.theme('Default1')
+    # banner screen
+    b_col1, b_col2, b_col3, b_col4 = LoadBanner.banner_layout()
 
 #   question screen
     q_col1, q_col2 = LoadQuestion.question_layout(1, sorted_questions[0][0], sorted_answers[0][0], sorted_answers[0][1], sorted_answers[0][2], sorted_answers[0][3])
@@ -60,7 +62,7 @@ def main():
             q_col20, q_col22, q_col24,
             q_col26, q_col28, q_col30,
         ),
-        r_col1, r_col2)
+        r_col1, r_col2, b_col1, b_col2, b_col3, b_col4)
 
     # create the window, finalize it and start it at full screen
     window = sg.Window('Sorting Experience', content, element_justification='c',
@@ -96,7 +98,30 @@ def main():
                 entered_name = values["-name-"]
 
             if entered_name != "":
-                Content.switch_content(window, "-welcome-", "-questions_1-")
+                Content.switch_content(window, "-welcome-", "-banner-")#"-questions_1-")
+        elif event == "-se-":
+            sg.popup(
+                "je gaat veel moeten programmeren, werken met complexe software en het onderhouden daarvan. maar je zal ook veel samenwerken met andere software engineers. je denkt 'outside the box' en geen enkele challenge is te groot voor jou.",
+                title="Software Engineering",
+                keep_on_top=True)
+        elif event == "-iict-":
+            sg.popup(
+                'Deze specialisatie vereist veel technische affiniteit, veel kennis over meerdere specialisaties en meerdere IT gebieden. Je gaat storing verhelpen en daarbij heb je een analytisch vermogen nodig zoals de vaardigheid om toekomst gericht te denken.',
+                title="Interactie Technologie",
+                keep_on_top=True)
+        elif event == "-fict-":
+            sg.popup(
+                'Je gaat digitale sporen opzoeken en digitaal gedrag analyseren, je gaat ook veel documenteren en je moet kennis hebben over relevante wetgevingen. Cyber security is hier een groot deel van.',
+                title="Forensisch ict",
+                keep_on_top=True)
+        elif event == "-data-":
+            sg.popup(
+                'jij kan goed patronen herkennen. je leeft voor data organiseren en analyseren. daarnaast werk je veel samen en ben je erg resultaatgericht.',
+                title="Data Engineering",
+                keep_on_top=True)
+        elif event == "-goToQuestions-":
+            Content.switch_content(window, "-banner-", "-questions_1-")
+
         elif "Next" in event:
             # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt  het vragen scherm,
             # en je kan hier zien welk van de vier keuzes gekozen is
