@@ -74,8 +74,6 @@ def main():
         event, values = window.read()
         index = 1
 
-        #print(values, event)
-
         if event == sg.WIN_CLOSED:
             break
         elif event == "-beginExperience-":
@@ -98,34 +96,35 @@ def main():
                 entered_name = values["-name-"]
 
             if entered_name != "":
-                Content.switch_content(window, "-welcome-", "-banner-")#"-questions_1-")
+                Content.switch_content(window, "-welcome-", "-banner-")
         elif event == "-se-":
             sg.popup(
                 "je gaat veel moeten programmeren, werken met complexe software en het onderhouden daarvan. maar je zal ook veel samenwerken met andere software engineers. je denkt 'outside the box' en geen enkele challenge is te groot voor jou.",
                 title="Software Engineering",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_software_engineering.ico")
         elif event == "-iict-":
             sg.popup(
                 'Deze specialisatie vereist veel technische affiniteit, veel kennis over meerdere specialisaties en meerdere IT gebieden. Je gaat storing verhelpen en daarbij heb je een analytisch vermogen nodig zoals de vaardigheid om toekomst gericht te denken.',
                 title="Interactie Technologie",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_interactie_technologie.ico")
         elif event == "-fict-":
             sg.popup(
                 'Je gaat digitale sporen opzoeken en digitaal gedrag analyseren, je gaat ook veel documenteren en je moet kennis hebben over relevante wetgevingen. Cyber security is hier een groot deel van.',
                 title="Forensisch ict",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_forensische_ICT.ico")
         elif event == "-data-":
             sg.popup(
                 'jij kan goed patronen herkennen. je leeft voor data organiseren en analyseren. daarnaast werk je veel samen en ben je erg resultaatgericht.',
                 title="Data Engineering",
-                keep_on_top=True)
+                keep_on_top=True,
+                icon="resources/img/logo_database.ico")
         elif event == "-goToQuestions-":
             Content.switch_content(window, "-banner-", "-questions_1-")
 
         elif "Next" in event:
-            # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt  het vragen scherm,
-            # en je kan hier zien welk van de vier keuzes gekozen is
-            #print(True, Content.index)
             temp = values.copy()
             temp.pop("-name-", None)
             # index = 1
@@ -206,14 +205,14 @@ def main():
                 spec: int = score_list.index(max(score_list))
 
                 if spec == 0:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Forensic ICT" \
                                               "\nJe gaat digitale sporen opzoeken en digitaal gedrag analyseren," \
                                               "\nJe gaat ook veel documenteren en je moet kennis hebben over" \
                                               "\nrelevante wetgevingen. Cyber security is hier een groot deel van."\
                                              f"\nForensisch ICT past {fict_perc}% bij je."
                 if spec == 1:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Interactie Technologie" \
                                               "\nDeze specialisatie vereist veel technische affiniteit, " \
                                               "\nveel kennis over meerdere specialisaties en meerdere IT gebieden." \
@@ -221,7 +220,7 @@ def main():
                                               "\nvermogen nodig zoals de vaardigheid om toekomst gericht te denken." \
                                              f"\nInteractie Technologie past {iict_perc}% bij je." 
                 if spec == 2:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Software Engineer" \
                                               "\nJe gaat veel moeten programmeren, " \
                                               "\n""werken met complexe software en het onderhouden daarvan." \
@@ -230,14 +229,14 @@ def main():
                                               "\nenkele challenge is te groot voor jou." \
                                              f"\nSoftware Engineer past {se_perc}% bij je."
                 if spec == 3:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Database Engineer" \
                                               "\njij kan goed patronen herkennen. je leeft voor data organiseren" \
                                               "\nen analyseren. daarnaast werk je veel samen " \
                                               "\nen ben je erg resultaatgericht." \
                                              f"\nData Engineer past {de_perc}% bij je."
                                             
-                window["-SPECRES-"].Update(specialisatie_resultaat)
+                window["-SPECRES-"].Update(result)
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
             window.close()
