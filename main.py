@@ -13,6 +13,7 @@ def main():
     f.init('../Scrolls5_key.json', fill=False)
 
     # choose theme
+    sg.theme("BlueMono")
 
     q_screen = []
     for _ in range(15):
@@ -41,7 +42,7 @@ def main():
     q_col29, q_col30 = LoadQuestion.question_layout(57, sorted_questions[14][0], sorted_answers[14][0], sorted_answers[14][1], sorted_answers[14][2], sorted_answers[14][3])
 
     # end sceen
-    r_col1, r_col2 = LoadResults.result_layout("Resultaat!")
+    r_col1, r_col2 = LoadResults.result_layout("")
 
     # content
     content = Content.draw_screens(
@@ -63,7 +64,7 @@ def main():
 
     # create the window, finalize it and start it at full screen
     window = sg.Window('Sorting Experience', content, element_justification='c',
-                       icon="resources/img/sorting_hat.ico", resizable=True).finalize()
+                       icon="resources/img/sorting_hat.ico", resizable=True, use_ttk_buttons=True).finalize()
     window.Maximize()
 
     # creates the main window, finalizes it and makes it start in full screen mode
@@ -173,26 +174,33 @@ def main():
                 spec: int = score_list.index(max(score_list))
 
                 if spec == 0:
-                    sg.popup(
-                        "Jouw specialisatie is: FICT ",
-                        title="Jouw Specialisatie",
-                        icon="resources/img/sorting_hat.ico")
+                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                                              "\nJouw specialisatie is: Forensic ICT" \
+                                              "\nJe gaat digitale sporen opzoeken en digitaal gedrag analyseren," \
+                                              "\nJe gaat ook veel documenteren en je moet kennis hebben over" \
+                                              "\nrelevante wetgevingen. Cyber security is hier een groot deel van."
                 if spec == 1:
-                    sg.popup(
-                        "Jouw specialisatie is: IICT ",
-                        title="Jouw Specialisatie",
-                        icon="resources/img/sorting_hat.ico")
+                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                                              "\nJouw specialisatie is: Interactie Technologie" \
+                                              "\nDeze specialisatie vereist veel technische affiniteit, " \
+                                              "\nveel kennis over meerdere specialisaties en meerdere IT gebieden." \
+                                              "\nJe gaat storing verhelpen en daarbij heb je een analytisch" \
+                                              "\nvermogen nodig zoals de vaardigheid om toekomst gericht te denken."
                 if spec == 2:
-                    sg.popup(
-                        "Jouw specialisatie is: SE ",
-                        title="Jouw Specialisatie",
-                        icon="resources/img/sorting_hat.ico")
+                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                                              "\nJouw specialisatie is: Software Engineer" \
+                                              "\nJe gaat veel moeten programmeren, " \
+                                              "\n""werken met complexe software en het onderhouden daarvan." \
+                                              "\nmaar je zal ook veel samenwerken met andere software engineers." \
+                                              "\nJe denkt 'outside the box' en geen " \
+                                              "\nenkele challenge is te groot voor jou."
                 if spec == 3:
-                    sg.popup(
-                        "Jouw specialisatie is: DE ",
-                        title="Jouw Specialisatie",
-                        icon="resources/img/sorting_hat.ico")         
-
+                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                                              "\nJouw specialisatie is: Database Engineer" \
+                                              "\njij kan goed patronen herkennen. je leeft voor data organiseren" \
+                                              "\nen analyseren. daarnaast werk je veel samen " \
+                                              "\nen ben je erg resultaatgericht."
+                window["-SPECRES-"].Update(specialisatie_resultaat)
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
             window.close()

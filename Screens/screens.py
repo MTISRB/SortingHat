@@ -19,8 +19,7 @@ class LoadQuestion:
                 [sg.Radio(ant2, "RADIO1", key=f"-Antwoord{id+1}-", font=font_s)],
                 [sg.Radio(ant3, "RADIO1", key=f"-Antwoord{id+2}-", font=font_s)],
                 [sg.Radio(ant4, "RADIO1", key=f"-Antwoord{id+3}-", font=font_s)],
-                [sg.Button('< Terug', font=font_s, size=7, key="-Back-"),
-                 sg.Button('Verder >', font=font_s, size=7, key="-Next-")]]
+                [sg.Button('Verder >', font=font_s, size=7, key="-Next-")]]
 
         return col1, col2
 
@@ -35,8 +34,8 @@ class LoadResults:
         font_s = ("Helvetica", 15)
 
         col1 = [[sg.Image("resources/img/sorting_hat-2.png")]]
-        col2 = [[sg.Text('Je resultaat is binnen', font=font)],
-                [sg.Text('Jij past bij:', font=font_s), sg.Text(result, font=font_s)],
+        col2 = [[sg.Text('Hmmmm... Ja... Als je dat wilt..', font=font)],
+                [sg.Text('Jij past bij:', font=font_s, key="-SPECRES-"), sg.Text(result, font=font_s)],
                 [sg.Button('Sluiten', key="-close-")]]
 
         return col1, col2
