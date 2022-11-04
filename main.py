@@ -194,7 +194,14 @@ def main():
                 score_list = []
                 for each in result:
                     score_list.append(each)
-                print(score_list)
+                fict_perc = 100  / score_list[0][1] * score_list[0][0]
+                iict_perc = 100 / score_list[1][1] * score_list[1][0]
+                se_perc = 100 / score_list[2][1] * score_list[2][0]
+                de_perc = 100 / score_list[3][1] * score_list[3][0]
+                fict_perc = int(fict_perc)
+                iict_perc = int(iict_perc)
+                se_perc = int(se_perc)
+                de_perc = int(de_perc)
 
                 spec: int = score_list.index(max(score_list))
 
@@ -203,14 +210,16 @@ def main():
                                               "\nJouw specialisatie is: Forensic ICT" \
                                               "\nJe gaat digitale sporen opzoeken en digitaal gedrag analyseren," \
                                               "\nJe gaat ook veel documenteren en je moet kennis hebben over" \
-                                              "\nrelevante wetgevingen. Cyber security is hier een groot deel van."
+                                              "\nrelevante wetgevingen. Cyber security is hier een groot deel van."\
+                                             f"\nForensisch ICT past {fict_perc}% bij je."
                 if spec == 1:
                     specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Interactie Technologie" \
                                               "\nDeze specialisatie vereist veel technische affiniteit, " \
                                               "\nveel kennis over meerdere specialisaties en meerdere IT gebieden." \
                                               "\nJe gaat storing verhelpen en daarbij heb je een analytisch" \
-                                              "\nvermogen nodig zoals de vaardigheid om toekomst gericht te denken."
+                                              "\nvermogen nodig zoals de vaardigheid om toekomst gericht te denken." \
+                                             f"\nInteractie Technologie past {iict_perc}% bij je." 
                 if spec == 2:
                     specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Software Engineer" \
@@ -218,13 +227,16 @@ def main():
                                               "\n""werken met complexe software en het onderhouden daarvan." \
                                               "\nmaar je zal ook veel samenwerken met andere software engineers." \
                                               "\nJe denkt 'outside the box' en geen " \
-                                              "\nenkele challenge is te groot voor jou."
+                                              "\nenkele challenge is te groot voor jou." \
+                                             f"\nSoftware Engineer past {se_perc}% bij je."
                 if spec == 3:
                     specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Database Engineer" \
                                               "\njij kan goed patronen herkennen. je leeft voor data organiseren" \
                                               "\nen analyseren. daarnaast werk je veel samen " \
-                                              "\nen ben je erg resultaatgericht."
+                                              "\nen ben je erg resultaatgericht." \
+                                             f"\nData Engineer past {de_perc}% bij je."
+                                            
                 window["-SPECRES-"].Update(specialisatie_resultaat)
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
