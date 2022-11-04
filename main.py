@@ -11,7 +11,7 @@ from Screens.screens import Content
 
 # PLACE ALL YOUR CODE TO RUN/TEST HERE!
 def main():
-    f.init('../Scrolls5_key.json', fill=False)
+    f.init('../Firebase key/mtisrb-firebase-adminsdk-u1zpn-13e20fa0ad.json', fill=True)
 
     # choose theme
     sg.theme("BlueMono")
@@ -74,8 +74,6 @@ def main():
         event, values = window.read()
         index = 1
 
-        #print(values, event)
-
         if event == sg.WIN_CLOSED:
             break
         elif event == "-beginExperience-":
@@ -98,7 +96,7 @@ def main():
                 entered_name = values["-name-"]
 
             if entered_name != "":
-                Content.switch_content(window, "-welcome-", "-banner-")#"-questions_1-")
+                Content.switch_content(window, "-welcome-", "-banner-")
         elif event == "-se-":
             sg.popup(
                 "je gaat veel moeten programmeren, werken met complexe software en het onderhouden daarvan. maar je zal ook veel samenwerken met andere software engineers. je denkt 'outside the box' en geen enkele challenge is te groot voor jou.",
@@ -123,9 +121,6 @@ def main():
             Content.switch_content(window, "-banner-", "-questions_1-")
 
         elif "Next" in event:
-            # dit gedeelte wordt geactiveerd wanneer er op de verder knop gedrukt wordt  het vragen scherm,
-            # en je kan hier zien welk van de vier keuzes gekozen is
-            #print(True, Content.index)
             temp = values.copy()
             temp.pop("-name-", None)
             # index = 1
@@ -194,25 +189,24 @@ def main():
                 score_list = []
                 for each in result:
                     score_list.append(each)
-                print(score_list)
 
                 spec: int = score_list.index(max(score_list))
 
                 if spec == 0:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Forensic ICT" \
                                               "\nJe gaat digitale sporen opzoeken en digitaal gedrag analyseren," \
                                               "\nJe gaat ook veel documenteren en je moet kennis hebben over" \
                                               "\nrelevante wetgevingen. Cyber security is hier een groot deel van."
                 if spec == 1:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Interactie Technologie" \
                                               "\nDeze specialisatie vereist veel technische affiniteit, " \
                                               "\nveel kennis over meerdere specialisaties en meerdere IT gebieden." \
                                               "\nJe gaat storing verhelpen en daarbij heb je een analytisch" \
                                               "\nvermogen nodig zoals de vaardigheid om toekomst gericht te denken."
                 if spec == 2:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Software Engineer" \
                                               "\nJe gaat veel moeten programmeren, " \
                                               "\n""werken met complexe software en het onderhouden daarvan." \
@@ -220,12 +214,12 @@ def main():
                                               "\nJe denkt 'outside the box' en geen " \
                                               "\nenkele challenge is te groot voor jou."
                 if spec == 3:
-                    specialisatie_resultaat = f"De resultaten zijn binnen {entered_name}..." \
+                    result = f"De resultaten zijn binnen {entered_name}..." \
                                               "\nJouw specialisatie is: Database Engineer" \
                                               "\njij kan goed patronen herkennen. je leeft voor data organiseren" \
                                               "\nen analyseren. daarnaast werk je veel samen " \
                                               "\nen ben je erg resultaatgericht."
-                window["-SPECRES-"].Update(specialisatie_resultaat)
+                window["-SPECRES-"].Update(result)
                 Content.switch_content(window, "-questions_15-", '-end-')
         elif event == "-close-":
             window.close()
